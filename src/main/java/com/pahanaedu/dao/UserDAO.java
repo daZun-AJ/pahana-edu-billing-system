@@ -92,4 +92,48 @@ public class UserDAO {
 		}
 	}
 	
+	
+	
+	//	LOGIN USER
+	public User login(String username, String password) {
+		String query = "SELECT * FROM users WHERE username=? AND password=?";
+		
+		try {
+			Connection connection = DBConnectionFactory.getConnection();
+			PreparedStatement statement = connection.prepareStatement(query);
+			
+			statement.setString(1, username);
+			statement.setString(2, password);
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				User user = new User(
+					resultSet.getInt("id"),
+					resultSet.getString("username"),
+					resultSet.getString("password"),
+					resultSet.getString("role"),
+					resultSet.getBoolean("isLogin")
+				);
+				
+				
+				//	SET isLogin = TRUE AFTER LOGIN
+				String statusQuery = "UPDATE users SET isLogin=TRUE WHERE id=?";
+				
+				try {
+					PreparedStatement updateStatement = connection.prepareStatement(statusQuery);
+					updateStatement.setInt(1, user.getId());
+					updateStatement.executeUpdate();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }
