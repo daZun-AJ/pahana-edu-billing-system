@@ -119,7 +119,7 @@ public class UserController extends HttpServlet {
         user.setRole(role);
         
         userDAO.addUser(user);
-        response.sendRedirect("views/admin-dashboard.jsp?msg=User Added");
+        response.sendRedirect(request.getContextPath() + "/UserController?action=list&msg=User Added");
 	}
 	
 	

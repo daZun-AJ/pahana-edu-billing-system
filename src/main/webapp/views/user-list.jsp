@@ -105,7 +105,7 @@
 
     <!-- Add new user -->
     <div style="margin-bottom:20px; text-align:right;">
-        <a href="add-user.jsp" class="btn btn-success">+ Add New User</a>
+        <a href="views/add-user.jsp" class="btn btn-success">+ Add New User</a>
     </div>
 
     <!-- User table -->

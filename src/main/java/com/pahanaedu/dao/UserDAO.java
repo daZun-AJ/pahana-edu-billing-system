@@ -22,6 +22,8 @@ public class UserDAO {
 			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getPassword());
 			statement.setString(3, user.getRole());
+			
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
