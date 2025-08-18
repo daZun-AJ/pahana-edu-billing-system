@@ -46,6 +46,11 @@
     .btn-success { background:#007BFF; color:#fff; padding:10px 18px; border-radius:9999px; font-weight:500; border:0; cursor:pointer; transition:0.3s; }
     .btn-success:hover { opacity:0.85; }
 
+    /* Search bar */
+    .search-box { margin:20px 0; text-align:right; }
+    .search-input { padding:10px 14px; font-size:14px; border:1px solid #cbd5e1; border-radius:9999px; width:250px; transition:0.2s; }
+    .search-input:focus { outline:none; border-color:#1d4ed8; box-shadow:0 0 0 3px rgba(29,78,216,0.2); }
+
     /* Table styling */
     table { width:100%; border-collapse:collapse; margin-top:20px; font-size:15px; }
     th, td { padding:12px 15px; text-align:left; }
@@ -74,7 +79,12 @@
     .toast { position:fixed; top:18px; left:50%; transform:translateX(-50%); background:#0ea5e9; color:#fff; padding:10px 16px; border-radius:9999px; font-weight:600; display:none; z-index:50; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
 
     /* Responsive */
-    @media (max-width:768px){ table, th, td{font-size:13px;} .actions{flex-direction:row;gap:6px;} }
+    @media (max-width:768px){ 
+        table, th, td{font-size:13px;} 
+        .actions{flex-direction:row;gap:6px;} 
+        .search-input{width:100%; margin-top:10px;} 
+        .search-box{text-align:center;} 
+    }
 </style>
 </head>
 <body>
@@ -103,13 +113,16 @@
     <!-- Heading -->
     <h1 class="title">User Management</h1>
 
-    <!-- Add new user -->
-    <div style="margin-bottom:20px; text-align:right;">
+    <!-- Actions: Add + Search -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
         <a href="views/add-user.jsp" class="btn btn-success">+ Add New User</a>
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by username or role...">
+        </div>
     </div>
 
     <!-- User table -->
-    <table>
+    <table id="userTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -168,6 +181,7 @@
 <div id="toast" class="toast"></div>
 
 <script>
+    // Toast message
     const params = new URLSearchParams(window.location.search);
     const msg = params.get("msg");
     if (msg) {
@@ -183,6 +197,22 @@
     function confirmLogout(){
         return confirm("Log out from the admin session?");
     }
+
+    // Search filter
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#userTable tbody tr");
+
+        rows.forEach(row => {
+            const username = row.cells[1].textContent.toLowerCase();
+            const role = row.cells[2].textContent.toLowerCase();
+            if (username.includes(filter) || role.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
 </script>
 </body>
 </html>

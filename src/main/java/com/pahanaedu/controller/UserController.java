@@ -137,17 +137,13 @@ public class UserController extends HttpServlet {
 	
 	
 	//	EDIT USER
-	private void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
-        
-        User user = new User(id, username, password, role, false);
-        userDAO.updateUser(user);
-        
-        response.sendRedirect("views/admin-dashboard.jsp?msg=User Updated");
+	private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    int id = Integer.parseInt(request.getParameter("id"));
+	    User editUser = userDAO.getUserById(id); // fetch user from DB
+	    request.setAttribute("editUser", editUser);
+	    request.getRequestDispatcher("views/edit-user.jsp").forward(request, response);
 	}
+
 	
 	
 	
