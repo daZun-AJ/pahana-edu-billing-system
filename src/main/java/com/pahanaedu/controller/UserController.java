@@ -61,6 +61,12 @@ public class UserController extends HttpServlet {
 				login(request, response);
 				break;
 				
+			case "logout":
+			    HttpSession s = request.getSession(false);
+			    if (s != null) s.invalidate();
+			    response.sendRedirect("views/login.jsp");
+			    break;
+				
 			case "list":
 				listUsers(request, response);
 				break;
@@ -72,7 +78,7 @@ public class UserController extends HttpServlet {
 			case "delete":
 				deleteUser(request, response);
 				break;
-
+				
 			default:
 				response.sendRedirect("views/login.jsp");
 				break;
@@ -157,6 +163,9 @@ public class UserController extends HttpServlet {
 			request.getRequestDispatcher("views/login.jsp").forward(request, response);
 		}
 	}
+	
+	
+	
 	
 
 }
