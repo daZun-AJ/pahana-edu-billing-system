@@ -37,8 +37,26 @@ public class UserController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String action = request.getParameter("action");
+	    if (action == null) action = "";
+
+	    switch (action) {
+	        case "list":
+	            listUsers(request, response);
+	            break;
+
+	        case "logout":
+	            HttpSession s = request.getSession(false);
+	            if (s != null) s.invalidate();
+	            response.sendRedirect("views/login.jsp");
+	            break;
+
+	        default:
+	            response.sendRedirect("views/login.jsp");
+	            break;
+	    }
+		
 	}
 
 	/**

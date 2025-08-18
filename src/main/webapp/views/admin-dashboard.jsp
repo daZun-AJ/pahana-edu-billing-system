@@ -33,8 +33,8 @@
     .badge{display:inline-block;font-size:12px;padding:3px 8px;border-radius:9999px;background:var(--badge);color:var(--badge-text);margin-top:6px;}
     
     .logout{
-        border:0;background:var(--danger);color:#fff;padding:12px 25px;border-radius:9999px;
-        cursor:pointer;
+        border:0;background:var(--danger);color:#fff;padding:15px 20px;border-radius:9999px;
+        cursor:pointer; font-size: 14px;  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     }
     
     /* Heading */
@@ -53,11 +53,6 @@
     .go{
         display:inline-flex; align-items:center; gap:10px; padding:10px 18px; border-radius:9999px; background:var(--primary); color:#fff;
         font-border:0; cursor:pointer;
-    }
-
-    .toast{
-        position:fixed; top:18px; left:50%; transform:translateX(-50%); background:#0ea5e9; color:#fff; padding:10px 16px;
-        border-radius:9999px; font-weight:600; display:none; z-index:50;
     }
 
     /* Responsive */
@@ -84,7 +79,10 @@
 
             <form method="post" action="<%=request.getContextPath()%>/UserController" onsubmit="return confirmLogout()">
                 <input type="hidden" name="action" value="logout">
-                <button class="logout" type="submit">logout</button>
+                <button class="logout" type="submit">
+                	logout 
+                	<img src="<%=request.getContextPath()%>/views/assets/logout.svg" alt="icon" style="width:16px; height:16px; margin-left:6px; filter: brightness(0) invert(1);">
+                </button>
             </form>
         </div>
     </div>
@@ -134,7 +132,6 @@
     </div>
 </div>
 
-<div id="toast" class="toast"></div>
 
 <script>
     const params = new URLSearchParams(window.location.search);
