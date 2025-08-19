@@ -87,7 +87,7 @@ public class ProductController extends HttpServlet {
             
         default:
             response.sendRedirect("ProductController?action=list");
-    }
+		}
 	}
 	
 	
@@ -103,11 +103,11 @@ public class ProductController extends HttpServlet {
 	
 	private void addProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Product product = new Product();
+        product.setProductCode(request.getParameter("product_code"));
         product.setName(request.getParameter("name"));
         product.setPrice(Double.parseDouble(request.getParameter("price")));
         product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         product.setCategory(request.getParameter("category"));
-        product.setImage(request.getParameter("image")); // Handle file upload separately if needed
         productDAO.addProduct(product);
         response.sendRedirect("ProductController?action=list&msg=Product Added");
     }
@@ -124,11 +124,11 @@ public class ProductController extends HttpServlet {
 	private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Product product = new Product();
         product.setId(Integer.parseInt(request.getParameter("id")));
+        product.setProductCode(request.getParameter("product_code"));
         product.setName(request.getParameter("name"));
         product.setPrice(Double.parseDouble(request.getParameter("price")));
         product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         product.setCategory(request.getParameter("category"));
-        product.setImage(request.getParameter("image"));
         productDAO.updateProduct(product);
         response.sendRedirect("ProductController?action=list&msg=Product Updated");
     }

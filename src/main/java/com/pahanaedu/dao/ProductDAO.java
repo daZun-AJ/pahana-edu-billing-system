@@ -22,16 +22,17 @@ public class ProductDAO {
 	
 	//	ADD PRODUCT
 	public void addProduct(Product product) {
-		String query = "INSERT INTO products (name, price, quantity, category, image) VALUES (?, ?, ?, ?, ?)";
+		String query = "INSERT INTO products (product_code, name, price, quantity, category) VALUES (?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
 			
-			statement.setString(1, product.getName());
-			statement.setDouble(2, product.getPrice());
-            statement.setInt(3, product.getQuantity());
-            statement.setString(4, product.getCategory());
-            statement.setString(5, product.getImage());
+			statement.setString(1, product.getProductCode());
+			statement.setString(2, product.getName());
+			statement.setDouble(3, product.getPrice());
+            statement.setInt(4, product.getQuantity());
+            statement.setString(5, product.getCategory());
+            
             statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -52,11 +53,11 @@ public class ProductDAO {
 			while (resultSet.next()) {
 				Product product = new Product(
 						resultSet.getInt("id"),
+						resultSet.getString("product_code"),
                         resultSet.getString("name"),
                         resultSet.getDouble("price"),
                         resultSet.getInt("quantity"),
-                        resultSet.getString("category"),
-                        resultSet.getString("image")
+                        resultSet.getString("category")
 				);
 				
 				products.add(product);
@@ -84,11 +85,11 @@ public class ProductDAO {
 			if (resultSet.next()) {
 				product = new Product(
 						resultSet.getInt("id"),
+						resultSet.getString("product_code"),
                         resultSet.getString("name"),
                         resultSet.getDouble("price"),
                         resultSet.getInt("quantity"),
-                        resultSet.getString("category"),
-                        resultSet.getString("image")
+                        resultSet.getString("category")
 				);
 			}
 		} catch (SQLException e) {
@@ -103,15 +104,15 @@ public class ProductDAO {
 	
 	//	UPDATE PRODUCT
 	public void updateProduct(Product product) {
-		String query = "UPDATE products SET name=?, price=?, quantity=?, category=?, image=? WHERE id=?";
+		String query = "UPDATE products SET product_code=?, name=?, price=?, quantity=?, category=? WHERE id=?";
 		
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, product.getName());
-            statement.setDouble(2, product.getPrice());
-            statement.setInt(3, product.getQuantity());
-            statement.setString(4, product.getCategory());
-            statement.setString(5, product.getImage());
+			statement.setString(1, product.getProductCode());
+			statement.setString(2, product.getName());
+            statement.setDouble(3, product.getPrice());
+            statement.setInt(4, product.getQuantity());
+            statement.setString(5, product.getCategory());
             statement.setInt(6, product.getId());
             statement.executeUpdate();
 		} catch (SQLException e) {

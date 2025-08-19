@@ -3,21 +3,22 @@ package com.pahanaedu.model;
 public class Product {
 	
 	private int id;
+	private String productCode;
     private String name;
     private double price;
     private int quantity;
     private String category;
-    private String image;
 	
     public Product() {}
     
-    public Product(int id, String name, double price, int quantity, String category, String image) {
+    public Product(int id, String productCode, String name, double price, int quantity, String category) {
 		this.id = id;
+		this.productCode = productCode;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
 		this.category = category;
-		this.image = image;
+		
 	}
 
 	public int getId() {
@@ -26,6 +27,14 @@ public class Product {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
 	}
 
 	public String getName() {
@@ -59,13 +68,4 @@ public class Product {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-	
 }
