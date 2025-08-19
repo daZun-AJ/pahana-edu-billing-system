@@ -30,14 +30,9 @@
     .right{display:flex;gap:40px;align-items:center;}
     .userbox{font-size:14px;line-height:1.1;}
     .username {font-size: 16px;}
-    .badge{
-		display:inline-block; font-size:12px; padding:3px 8px; border-radius:9999px; background:#22c55e40;
- 		color:#22c55e; margin-top:6px;
-	}
-    .logout{
-        border:0;background:var(--danger);color:#fff;padding:12px 25px;border-radius:9999px;
-        cursor:pointer;
-    }
+    .badge{ display:inline-block; font-size:12px; padding:3px 8px; border-radius:9999px; background:#22c55e40; color:#22c55e; margin-top:6px; }
+    .logout { border:0; background:#ef4444; color:#fff; padding:15px 20px; border-radius:9999px; cursor:pointer; font-size:14px; font-weight:500; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+
     
     /* Heading */
     .title{font-size:48px;font-weight:600;text-align:center;margin:30px 0 8px;}
@@ -85,7 +80,10 @@
 
             <form method="post" action="<%=request.getContextPath()%>/UserController" onsubmit="return confirmLogout()">
                 <input type="hidden" name="action" value="logout">
-                <button class="logout" type="submit">logout</button>
+                <button class="logout" type="submit">
+                	logout
+                	<img src="<%=request.getContextPath()%>/views/assets/logout.svg" alt="icon" style="width:16px; height:16px; margin-left:6px; filter: brightness(0) invert(1);">
+                </button>
             </form>
         </div>
     </div>
@@ -98,10 +96,11 @@
     <div class="grid">
 
         <div class="card">
-            <h3>View Customers</h3>
-            <p>Manage and view all customers</p>
-            <a class="go" href="<%=request.getContextPath()%>/CustomerController?action=list">Go Forward →</a>
-        </div>
+    		<h3>View Customers</h3>
+    		<p>Manage and view all customers</p>
+    		<a class="go" href="<%=request.getContextPath()%>/CustomerController?action=list">Go Forward →</a>
+		</div>
+
 
         <div class="card">
             <h3>View Products</h3>
