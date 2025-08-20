@@ -47,19 +47,6 @@ public class BillController extends HttpServlet {
             req.setAttribute("bill", bill);
             req.getRequestDispatcher("/views/InvoiceView.jsp").forward(req, resp);
 
-        } else if ("records".equals(action)) {
-            List<Bill> bills = billDAO.getAllBills();
-            req.setAttribute("bills", bills);
-
-            req.setAttribute("totalSalesToday", billDAO.getTotalSalesToday());
-            req.setAttribute("totalSales7Days", billDAO.getTotalSalesLast7Days());
-            req.setAttribute("totalSales30Days", billDAO.getTotalSalesLast30Days());
-
-            req.setAttribute("customersCount", new CustomerDAO().getAllCustomers().size());
-            req.setAttribute("productsCount", new ProductDAO().getAllProducts().size());
-            req.setAttribute("usersCount", new UserDAO().getAllUsers().size());
-
-            req.getRequestDispatcher("/views/view-records.jsp").forward(req, resp);
         } else { // default or list
             List<Bill> bills = billDAO.getAllBills();
             req.setAttribute("bills", bills);

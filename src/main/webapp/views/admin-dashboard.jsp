@@ -119,10 +119,10 @@
         </div>
 
         <div class="card">
-		  <h3>View Records</h3>
-		  <p>Check bills, revenue, and sales stats</p>
-		  <a class="go" href="<%=request.getContextPath()%>/BillController?action=records">Go Forward →</a>
-		</div>
+            <h3>View Reports</h3>
+            <p>Manage and view all reports</p>
+            <a class="go" href="<%=request.getContextPath()%>/ReportController?action=list">Go Forward →</a>
+        </div>
 
         <div class="card">
             <h3>Help Section</h3>

@@ -39,8 +39,6 @@
     /* Add customer button */
     .btn-success { background:#007BFF; color:#fff; padding:10px 18px; border-radius:9999px; font-weight:500; border:0; cursor:pointer; transition:0.3s; }
     .btn-success:hover { opacity:0.85; }
-    .btn-secondary { background:#64748b; color:#fff; padding:10px 18px; border-radius:9999px; font-weight:500; border:0; cursor:pointer; transition:0.3s; }
-    .btn-secondary:hover { opacity:0.85; }
 
     /* Search bar */
     .search-box { margin:20px 0; text-align:right; }
@@ -103,10 +101,7 @@
 
     <!-- Actions -->
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-    	<div>
-    		<a href="<%= user.getRole().equalsIgnoreCase("admin") ? "views/admin-dashboard.jsp" : "views/staff-dashboard.jsp" %>" class="btn-secondary">Go Back to Dashboard</a>
-    		<a href="CustomerController?action=new" class="btn-success">+ Add New Customer</a>
-    	</div>
+        <a href="CustomerController?action=new" class="btn-success">+ Add New Customer</a>
         <div class="search-box">
             <input type="text" id="searchInput" class="search-input" placeholder="Search by name or account number...">
         </div>
