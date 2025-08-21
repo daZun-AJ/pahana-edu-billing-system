@@ -2,7 +2,7 @@
 <%@ page import="com.pahanaedu.model.User" %>
 <%
     User user = (User) session.getAttribute("user");
-    if (user == null) { response.sendRedirect("login.jsp"); return; }
+    if (user == null) { response.sendRedirect("views/login.jsp"); return; }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +110,7 @@
             </div>
 
             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
-                <a href="<%= user.getRole().equalsIgnoreCase("admin") ? "AdminDashboard.jsp" : "StaffDashboard.jsp" %>" class="btn btn-danger">Cancel</a>
+                <a href="<%= user.getRole().equalsIgnoreCase("admin") ? "views/admin-dashboard.jsp" : "views/staff-dashboard.jsp" %>" class="btn btn-danger">Cancel</a>
                 <button type="submit" class="btn btn-primary">Add Product</button>
             </div>
         </form>

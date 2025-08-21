@@ -167,4 +167,20 @@ public class UserDAO {
 	    return user;
 	}
 
+	
+	
+	
+	// Set User Status to Offline (isLogin = false)
+	public void setUserOffline(int id) {
+	    String query = "UPDATE users SET isLogin = FALSE WHERE id = ?";
+	    try {
+	        Connection connection = DBConnectionFactory.getConnection();
+	        PreparedStatement statement = connection.prepareStatement(query);
+	        statement.setInt(1, id);
+	        statement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 }

@@ -4,7 +4,7 @@
 <%
     User user = (User) session.getAttribute("user");
     if (user == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("views/login.jsp");
         return;
     }
     List<User> users = (List<User>) request.getAttribute("users");

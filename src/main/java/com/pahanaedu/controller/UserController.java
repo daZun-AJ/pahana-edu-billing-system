@@ -66,9 +66,7 @@ public class UserController extends HttpServlet {
                 break;
 
             case "logout":
-                HttpSession s = request.getSession(false);
-                if (s != null) s.invalidate();
-                response.sendRedirect("views/login.jsp");
+                logout(request, response);  // Call the logout method here
                 break;
 
             case "list":
@@ -177,4 +175,26 @@ public class UserController extends HttpServlet {
             request.getRequestDispatcher("views/login.jsp").forward(request, response);
         }
     }
+    
+    
+    
+    // Corrected Logout Method
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (user != null) {
+            // Set user status as offline
+            userDAO.setUserOffline(user.getId());
+
+            // Invalidate session after updating the status
+            HttpSession session = request.getSession(false);
+            if (session != null) session.invalidate();
+        }
+
+        // Redirect to login page after logout
+        response.sendRedirect("views/login.jsp");
+    }
+
+
+
 }
